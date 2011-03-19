@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EasyObjectStoreFactory.cs" />
     <Compile Include="Helpers\ApplicationSettingsValueGetter.cs" />
     <Compile Include="Helpers\FileSystem.cs" />
     <Compile Include="Helpers\GetDataPathForType.cs" />
