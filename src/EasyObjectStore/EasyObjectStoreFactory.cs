@@ -6,7 +6,7 @@ using EasyObjectStore.Helpers;
 
 namespace EasyObjectStore
 {
-	public class EasyObjectStoreFactory<T>
+	public static class EasyObjectStoreFactory<T>
 	{
 		public static EasyObjectStore<T> GetInstance()
 		{
