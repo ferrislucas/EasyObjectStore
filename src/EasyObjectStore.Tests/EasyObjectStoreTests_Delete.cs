@@ -6,7 +6,7 @@ using Moq;
 namespace EasyObjectStore.Tests
 {
 	[TestClass]
-	public class ObjectStoreTests_Delete
+	public class EasyObjectStoreTests_Delete
 	{
 		private AutoMoqer mocker;
 

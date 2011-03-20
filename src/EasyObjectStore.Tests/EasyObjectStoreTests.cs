@@ -7,7 +7,7 @@ using Moq;
 namespace EasyObjectStore.Tests
 {
 	[TestClass]
-	public class ObjectStoreTests
+	public class EasyObjectStoreTests
 	{
 		private AutoMoqer mocker;
 
@@ -104,6 +104,23 @@ namespace EasyObjectStore.Tests
 			var result = mocker.Resolve<EasyObjectStore<DataClass>>().GetById("1");
 
 			Assert.IsNull(result);
+		}
+
+		[TestMethod]
+		public void SaveAndReturnId_method_sets_Id_property_before_saving_when_the_id_property_is_not_set()
+		{
+			var guid = Guid.NewGuid();
+			mocker.GetMock<IGetDataPathForType>()
+				.Setup(a => a.GetPathForDataByType(typeof(DataClass)))
+				.Returns("/path/");
+			mocker.GetMock<IGuidGetter>().Setup(a => a.GetGuid()).Returns(guid);
+
+			mocker.Resolve<EasyObjectStore<DataClass>>().SaveAndReturnId(new DataClass()
+			                                                             	{
+			                                                             		Name = "test"
+			                                                             	});
+
+			mocker.GetMock<ISetValueOfIdProperty>().Verify(a => a.SetId(It.Is<DataClass>(b => b.Name == "test"), guid.ToString()), Times.Once());
 		}
 	}
 

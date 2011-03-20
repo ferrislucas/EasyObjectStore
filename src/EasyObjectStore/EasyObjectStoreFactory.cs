@@ -15,7 +15,8 @@ namespace EasyObjectStore
 											new GetDataPathForType(new GetPathToDataDirectoryService(new ApplicationSettingsValueGetter())), 
 											new GetValueOfIdPropertyForInstance(new GetNameOfIdPropertyForType()), 
 											new GuidGetter(), 
-											new FileSystem());
+											new FileSystem(), 
+											new SetValueOfIdProperty(new GetNameOfIdPropertyForType()));
 		}
 
 		public static EasyObjectStore<T> GetInstance(string pathToDataDirectory)
@@ -24,7 +25,8 @@ namespace EasyObjectStore
 											new GetDataPathForType(new GetHardCodedPathToDataDirectoryService(pathToDataDirectory)),
 											new GetValueOfIdPropertyForInstance(new GetNameOfIdPropertyForType()),
 											new GuidGetter(),
-											new FileSystem());
+											new FileSystem(),
+											new SetValueOfIdProperty(new GetNameOfIdPropertyForType()));
 		}
 
 		private class GetHardCodedPathToDataDirectoryService : IGetPathToDataDirectoryService

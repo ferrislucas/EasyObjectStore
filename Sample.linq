@@ -6,10 +6,17 @@
 void Main()
 {
 	var easyObjectStore = EasyObjectStoreFactory<SomeClass>.GetInstance(@"C:\Users\lucasf\Desktop\remove");
-	var id = easyObjectStore.SaveAndReturnId(new SomeClass()
-										{
-											Name = "thing #1",
-										});
+	
+//	for (var n = 0; n <= 9999; n++)
+//	{
+//		easyObjectStore.SaveAndReturnId(new SomeClass()
+//													{
+//														Name = "thing #" + n,
+//													});
+//	}
+	
+	var result = easyObjectStore.GetAll().Where(a => a.Name == "thing #1234").FirstOrDefault();
+	result.Dump();
 }
 
 public class SomeClass

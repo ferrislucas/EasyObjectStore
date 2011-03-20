@@ -7,7 +7,7 @@ using Moq;
 namespace EasyObjectStore.Tests
 {
 	[TestClass]
-	public class ObjectStoreTests_GetAll
+	public class EasyObjectStoreTests_GetAll
 	{
 		private AutoMoqer mocker;
 

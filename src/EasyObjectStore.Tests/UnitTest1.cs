@@ -9,21 +9,27 @@ namespace EasyObjectStore.Tests
 	[TestClass]
 	public class UnitTest1
 	{
-		[TestMethod]
+		//[TestMethod]
 		public void TestMethod1()
 		{
-			var easyObjectStore = EasyObjectStoreFactory<SomeClass>.GetInstance(@"C:\Users\lucasf\Desktop\remove");
-			var id = easyObjectStore.SaveAndReturnId(new SomeClass()
-			{
-				Name = "thing #1",
-			});
+			var easyObjectStore = EasyObjectStoreFactory<SomeClass2>.GetInstance(@"C:\Users\lucasf\Desktop\remove");
+			var id = easyObjectStore.SaveAndReturnId(new SomeClass2()
+															{
+																Name = "thing #1",
+															});
 		}
 	}
 
-	[Serializable]
+	public class SomeClass2
+	{
+		public Guid Id { get; set; }
+		public string Name { get; set; }
+		public SomeThing[] Things { get; set; }
+	}
+
 	public class SomeClass
 	{
-		public string Id { get; set; }
+		public int Id { get; set; }
 		public string Name { get; set; }
 		public SomeThing[] Things { get; set; }
 	}

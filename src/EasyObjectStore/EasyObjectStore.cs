@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 using EasyObjectStore.Helpers;
 
 namespace EasyObjectStore
@@ -18,13 +19,16 @@ namespace EasyObjectStore
 		private readonly IGetValueOfIdPropertyForInstance getValueOfIdPropertyForInstance;
 		private readonly IGuidGetter guidGetter;
 		private readonly IFileSystem fileSystem;
+		private readonly ISetValueOfIdProperty setValueOfIdProperty;
 
 		public EasyObjectStore(IXmlFileSerializationHelper xmlFileSerializationHelper,
 							IGetDataPathForType getDataPathForType,
 							IGetValueOfIdPropertyForInstance getValueOfIdPropertyForInstance,
 							IGuidGetter guidGetter,
-							IFileSystem fileSystem)
+							IFileSystem fileSystem,
+							ISetValueOfIdProperty setValueOfIdProperty)
 		{
+			this.setValueOfIdProperty = setValueOfIdProperty;
 			this.fileSystem = fileSystem;
 			this.guidGetter = guidGetter;
 			this.getValueOfIdPropertyForInstance = getValueOfIdPropertyForInstance;
@@ -49,7 +53,12 @@ namespace EasyObjectStore
 
 		public string SaveAndReturnId(T instance)
 		{
-			var idValue = getValueOfIdPropertyForInstance.GetId(instance) ?? guidGetter.GetGuid().ToString();
+			var idValue = getValueOfIdPropertyForInstance.GetId(instance);
+			if (idValue == null)
+			{
+				idValue = guidGetter.GetGuid().ToString();
+				setValueOfIdProperty.SetId(instance, idValue);
+			}
 			var path = string.Format("{0}{1}.xml", getDataPathForType.GetPathForDataByType(typeof(T)), idValue);
 			xmlFileSerializationHelper.SerializeToPath(instance, path);
 			return idValue;

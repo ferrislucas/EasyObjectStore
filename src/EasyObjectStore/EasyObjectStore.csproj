@@ -49,6 +49,7 @@
     <Compile Include="Helpers\GetPathToDataDirectoryService.cs" />
     <Compile Include="Helpers\GetValueOfIdPropertyForInstance.cs" />
     <Compile Include="Helpers\GuidGetter.cs" />
+    <Compile Include="Helpers\SetValueOfIdProperty.cs" />
     <Compile Include="Helpers\XmlFileSerializationHelper.cs" />
     <Compile Include="EasyObjectStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
