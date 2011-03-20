@@ -55,7 +55,6 @@
     <Compile Include="ObjectStoreTests_Delete.cs" />
     <Compile Include="ObjectStoreTests_GetAll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sample.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EasyObjectStore\EasyObjectStore.csproj">

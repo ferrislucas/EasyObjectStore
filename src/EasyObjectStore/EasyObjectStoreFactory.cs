@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using EasyObjectStore.Helpers;
@@ -37,7 +38,7 @@ namespace EasyObjectStore
 
 			public string GetPathToDirectory()
 			{
-				return pathToDataDirectory;
+				return pathToDataDirectory.EndsWith(Path.DirectorySeparatorChar.ToString()) ? pathToDataDirectory : pathToDataDirectory + Path.DirectorySeparatorChar;
 			}
 		}
 	}

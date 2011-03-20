@@ -12,11 +12,11 @@ void Main()
 										});
 }
 
-[Serializable]
 public class SomeClass
 {
+	public string Id {get; set;}
 	public string Name {get; set;}
-	public IEnumerable<SomeThing> Things {get; set;}
+	public SomeThing[] Things {get; set;}
 }
 
 public class SomeThing

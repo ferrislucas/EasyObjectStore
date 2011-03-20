@@ -32,6 +32,19 @@ namespace EasyObjectStore.Tests.Helpers
 		}
 
 		[TestMethod]
+		public void Returns_null_when_Id_field_is_null()
+		{
+			mocker.GetMock<IGetNameOfIdPropertyForType>()
+				.Setup(a => a.GetNameOfIdProperty(typeof(Test1)))
+				.Returns("Id");
+
+			var result = mocker.Resolve<GetValueOfIdPropertyForInstance>()
+				.GetId(new Test1());
+
+			Assert.AreEqual(null, result);
+		}
+
+		[TestMethod]
 		public void Returns_value_of_Key_field()
 		{
 			mocker.GetMock<IGetNameOfIdPropertyForType>()
@@ -46,6 +59,11 @@ namespace EasyObjectStore.Tests.Helpers
 
 			Assert.AreEqual("2", result);
 		}
+	}
+
+	public class Test3
+	{
+		public int Bleh { get; set; }
 	}
 
 	public class Test2

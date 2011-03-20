@@ -18,8 +18,6 @@ namespace EasyObjectStore.Helpers
 
 		public string GetId(object o)
 		{
-			string returnValue = null;
-
 			var nameOfIdPropertyFieldOrProperty = getNameOfIdPropertyForType.GetNameOfIdProperty(o.GetType());
 			var idPropertyInformation = o.GetType().GetProperty(nameOfIdPropertyFieldOrProperty, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public);
 			
@@ -28,7 +26,8 @@ namespace EasyObjectStore.Helpers
 				return o.GetType().GetField(nameOfIdPropertyFieldOrProperty, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public).GetValue(o).ToString();
 			}
 
-			return idPropertyInformation.GetValue(o, null).ToString();
+			var value = idPropertyInformation.GetValue(o, null);
+			return value == null ? null : value.ToString();
 		}
 	}
 }
