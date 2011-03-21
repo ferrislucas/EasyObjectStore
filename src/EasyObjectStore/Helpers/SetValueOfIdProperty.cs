@@ -25,7 +25,10 @@ namespace EasyObjectStore.Helpers
 			var nameOfIdPropertyFieldOrProperty = getNameOfIdPropertyForType.GetNameOfIdProperty(instance.GetType());
 			var idPropertyInformation = instance.GetType().GetProperty(nameOfIdPropertyFieldOrProperty, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public);
 
-			idPropertyInformation.SetValue(instance, idValue, null);
+			if (idPropertyInformation.PropertyType.FullName == "System.Guid")
+			    idPropertyInformation.SetValue(instance, new Guid(idValue.ToString()), null);
+			else
+				idPropertyInformation.SetValue(instance, idValue, null);
 		}
 	}
 }

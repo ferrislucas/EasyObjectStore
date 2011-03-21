@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 
 namespace EasyObjectStore.Helpers
 {
@@ -27,6 +28,10 @@ namespace EasyObjectStore.Helpers
 			}
 
 			var value = idPropertyInformation.GetValue(o, null);
+
+			if ((value != null) && (value.ToString() == new Guid().ToString()))
+				value = null;
+
 			return value == null ? null : value.ToString();
 		}
 	}

@@ -1,6 +1,8 @@
-﻿using AutoMoq;
+﻿using System;
+using AutoMoq;
 using EasyObjectStore.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace EasyObjectStore.Tests.Helpers
 {
@@ -32,6 +34,19 @@ namespace EasyObjectStore.Tests.Helpers
 		}
 
 		[TestMethod]
+		public void Returns_null_when_Id_is_Guid_and_it_is_not_set()
+		{
+			mocker.GetMock<IGetNameOfIdPropertyForType>()
+				.Setup(a => a.GetNameOfIdProperty(It.IsAny<Type>()))
+				.Returns("Id");
+
+			var result = mocker.Resolve<GetValueOfIdPropertyForInstance>()
+				.GetId(new TestClassWitGuidId());
+
+			Assert.AreEqual(null, result);
+		}
+
+		[TestMethod]
 		public void Returns_null_when_Id_field_is_null()
 		{
 			mocker.GetMock<IGetNameOfIdPropertyForType>()
@@ -59,6 +74,12 @@ namespace EasyObjectStore.Tests.Helpers
 
 			Assert.AreEqual("2", result);
 		}
+	}
+
+	public class TestClassWitGuidId
+	{
+		public Guid Id { get; set; }
+		public string Name { get; set; }
 	}
 
 	public class Test3
